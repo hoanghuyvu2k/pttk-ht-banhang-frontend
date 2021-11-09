@@ -1,22 +1,44 @@
 import React from "react";
+import { Row } from "react-bootstrap";
+import "./footer.scss";
 
 function Footer() {
   return (
     <footer>
       <div className="container-fluid bg-secondary">
-        <div className="row">
-          <div className="col-md-8 offset-md-2">
-            <div className="row">
-              <div className="col-md-4">
-                hello
+        <Row>
+          <div className="col-md-10 offset-md-1 py-5">
+            <Row>
+              <div className="col-md-6">
+                <h1>Logo</h1>
               </div>
-              <div className="col-md-4">
-                hello
+              <div className="col-md-3">
+                <label className="label-footer">Tài khoản</label>
+                <br />
+                <span>Trang quản lý cá nhân</span>
+                <br />
+                <span>So sánh sản phẩm</span>
+                <br />
+                <span>Yêu thích</span>
               </div>
-              <div className="col-md-4">
-                hello
+              <div className="col-md-3">
+                <label className="label-footer">Giới thiệu</label>
+                <br />
+                <span>Đại chỉ: HV Công nghệ Bưu chính Viễn thông</span>
+                <br />
+                <span>SĐT: 099999999</span>
+                <br />
+                <span>Email: onlineshop@thunv.vn</span>
               </div>
-            </div>
+            </Row>
+          </div>
+        </Row>
+        <div className="row py-1 bg-footer d-flex align-items-center">
+          <div className="col-md-12 text-center">
+            © 2020 Copyright:
+            <a className="text-dark" href="https://thunvc.blogspot.com/">
+              thunv.blogspot.com
+            </a>
           </div>
         </div>
       </div>
