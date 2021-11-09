@@ -1,3 +1,102 @@
 .contact-line {
     background-color: #F0F0E9;
+    a {
+        text-decoration: none;
+        font-size: 11px;
+        color: black;
+    }
+    li {
+        margin-left: 15px;
+    }
+    .dropdown {
+        background-color: transparent !important;
+        border-width: 0 !important;
+        color: gray;
+        i {
+            align-self: center;
+            margin-right: 5px;
+        }
+        span {
+            font-size: 12px
+        }
+        &:hover {
+            color: #007bff !important;
+        }
+        .btn-primary.dropdown-toggle {
+            color: gray !important;
+        }
+    }
+}
+
+.header {
+    .logo {
+        width: 100%;
+        max-width: 150px;
+        height: 76px;
+        background-color: white;
+    }
+    a {
+        padding: 7px 40px 7px 7px;
+        border: 1px solid #0e8ce4;
+        border-radius: 5px;
+        margin-left: 10px;
+        text-decoration: none;
+        color: #0e8ce4;
+        i {
+            margin-right: 5px;
+        }
+    }
+    @media (max-width:991px) {
+        a>span {
+            display: none;
+        }
+    }
+}
+
+.category {
+    background: white;
+    box-shadow: 0 5px 20px rgba(0, 0, 0, .1);
+    .categories {
+        width: 270px;
+    }
+    .btn-categories {
+        font-size: 1.1rem;
+        font-weight: bold;
+        display: flex;
+        cursor: pointer;
+        align-items: center;
+        justify-content: flex-start;
+        padding: 10px;
+        padding-left: 25px;
+        // height: 100%;
+        width: 100%;
+        color: white;
+        img {
+            margin-right: 10px;
+        }
+    }
+    .dropdown {
+        display: flex;
+        align-items: center;
+        .btn-primary {
+            background-color: transparent !important;
+            border-width: 0 !important;
+        }
+        i {
+            align-self: center;
+            margin-right: 5px;
+        }
+        span {
+            font-size: 12px
+        }
+        &:hover {
+            color: #007bff !important;
+        }
+        .btn-primary.dropdown-toggle {
+            color: #0d6efd !important;
+        }
+        .btn {
+            padding-top: 0.43rem;
+        }
+    }
 }
