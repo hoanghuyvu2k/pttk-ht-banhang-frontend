@@ -11,6 +11,9 @@ import VisibilityIcon from '@material-ui/icons/Visibility';
 import AddShoppingCartIcon from '@material-ui/icons/AddShoppingCart';
 import Tooltip from '@material-ui/core/Tooltip';
 function ItemProduct(props) {
+  useEffect(() => {
+    console.log(props.data)
+  })
     const formatMoney = (money, is_zero = false) => {
         if (!money && typeof money !== "number" && !is_zero) return;
       
@@ -27,8 +30,8 @@ function ItemProduct(props) {
           component="img"
           alt="Contemplative Reptile"
           height="200"
-          image="https://product.hstatic.net/1000370129/product/iphone_12_den_ed29e3e4d1bb4c1a833e011bf010606b_grande_a80666949c444cf6be42cbcb42355cf1_master.png"
-          title="Điện thoại"
+          image={props.data?.img}
+          title={props.data?.title}
         />
         <CardContent>
           <Typography
@@ -37,13 +40,13 @@ function ItemProduct(props) {
             component="h3"
             className="title_card"
           >
-            IPhone 13
+            {props.data?.name}
           </Typography>
-          <p className="product_price_old">{formatMoney(20000000 || 0)}</p>
+          <p className="product_price_old">{formatMoney(props.data?.price || 0)}</p>
           <p className="product_price">
             {formatMoney(17000000 || 0)}
           </p>
-          <p className="content_card">Sản phẩm mới ra mắt</p>
+          <p className="content_card">{props.data?.description}</p>
         </CardContent>
       </CardActionArea>
       <CardActions>
