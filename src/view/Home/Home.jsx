@@ -21,28 +21,27 @@ function Home() {
         <div className="col-md-12">
           <BannerHome></BannerHome>
         </div>
-        <div className="row">
+        <div className="row mt-3">
           <div className="col-md-12">
             <div className="row">
-              <h3>
-                Đồ điện tử 
-                <hr />
-              </h3>
+              <div className="col-md-12">
+              <h3 htmlFor="" className="text-category">Đồ điện tử</h3>
+              </div>
             </div>
             <div className="row">
-              <div className="col-md-4 mt-1">
+              <div className="col-md-3">
                 <ItemProduct data={item}></ItemProduct>
               </div>
-              <div className="col-md-4 mt-1">
+              <div className="col-md-3">
                 <ItemProduct data={item}></ItemProduct>
               </div>
-              <div className="col-md-4 mt-1">
+              <div className="col-md-3">
                 <ItemProduct data={item}></ItemProduct>
               </div>
-              <div className="col-md-4 mt-1">
+              <div className="col-md-3">
                 <ItemProduct data={item}></ItemProduct>
               </div>
-              <div className="col-md-4 mt-1">
+              <div className="col-md-3">
                 <ItemProduct data={item}></ItemProduct>
               </div>
             </div>

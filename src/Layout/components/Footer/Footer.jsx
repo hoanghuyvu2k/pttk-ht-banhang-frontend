@@ -4,7 +4,7 @@ import "./footer.scss";
 
 function Footer() {
   return (
-    <footer>
+    <footer className="mt-5">
       <div className="container-fluid bg-secondary">
         <Row>
           <div className="col-md-10 offset-md-1 py-5">
