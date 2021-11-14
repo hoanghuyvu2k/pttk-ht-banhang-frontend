@@ -18,7 +18,7 @@ function Content() {
             )
           );
         })}
-        <Redirect from="/" to="/Home" />
+        <Redirect from="/" to="/Cart" />
       </Switch>
     </div>
   );

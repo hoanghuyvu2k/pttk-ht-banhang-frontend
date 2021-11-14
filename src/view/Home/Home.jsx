@@ -10,11 +10,11 @@ function Home() {
   }, []);
 
   const listItem = () => {
-    let items = {'img': 'https://salt.tikicdn.com/cache/400x400/ts/product/9e/44/ea/c4827f03c296f4c1591927393b9615b8.jpg.webp', 'title': 'IPhone 13 Promax', 'description': 'Sản phẩm mới ra đời', 'btn': 'Xem chi tiết'};
+    let items = { 'img': 'https://salt.tikicdn.com/cache/400x400/ts/product/9e/44/ea/c4827f03c296f4c1591927393b9615b8.jpg.webp', 'title': 'IPhone 13 Promax', 'description': 'Sản phẩm mới ra đời', 'btn': 'Xem chi tiết' };
 
-    return items; 
+    return items;
   }
- 
+
   return (
     <div className="container">
       <div className="row">
@@ -25,7 +25,7 @@ function Home() {
           <div className="col-md-12">
             <div className="row">
               <h3>
-                Đồ điện tử 
+                Đồ điện tử
                 <hr />
               </h3>
             </div>
