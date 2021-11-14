@@ -4,7 +4,6 @@ import "./Cart.scss";
 import CartTable from "./CartTable";
 import {ApiClient} from "../../api/config.js";
 import {PRODUCT_API} from "../../constants/constants.api";
-const axios = require('axios').default;
 function Cart() {
   const testApi = async ()=>{
 
@@ -20,25 +19,7 @@ function Cart() {
         rom: null,
         screen: null
       };
-      let  res = await ApiClient.post('/electronic-items/search',data)
-      // axios.post('http://localhost:8092/sell-online/electronic-items/search', data)
-      // .then(function (response) {
-      //   console.log(response);
-      // })
-      // .catch(function (error) {
-      //   console.log(error);
-      // });
-
-// fetch('http://localhost:8092/sell-online/electronic-items/search', {
-//   method: 'POST', 
-//   body: JSON.stringify(data), 
-//   headers:{
-//     'Content-Type': 'application/json'
-//   }
-// })
-// .then(res => res.json())
-// .then(response => console.log('Success:', JSON.stringify(response)))
-// .catch(error => console.error('Error:', error))
+      let  res = await ApiClient.post(PRODUCT_API.ELECTRIC.SEARCH,data);
     } catch (error) {
       console.log(error)
     }
