@@ -11,8 +11,6 @@ const createAxios = () => {
   axiosInstant.defaults.timeout = 20000;
   axiosInstant.defaults.headers['Content-Type'] = 'application/json';
   axiosInstant.defaults.headers['access-control-allow-origin'] = '*';
-  axiosInstant.defaults.headers['Authorization'] =
-    Cookie.get('token') && `Bearer ${Cookie.get('token')}`;
 
   axiosInstant.interceptors.response.use(
     (response) => {
