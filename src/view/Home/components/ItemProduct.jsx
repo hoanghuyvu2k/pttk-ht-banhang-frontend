@@ -30,8 +30,8 @@ function ItemProduct(props) {
           component="img"
           alt="Contemplative Reptile"
           height="200"
-          image={props.data?.img}
-          title={props.data?.title}
+          image={ 'http://localhost:8091' + props.data?.path_file[0].path_file.substring(1)}
+          title={props.data?.electronic.manufacture}
         />
         <CardContent>
           <Typography
@@ -40,13 +40,10 @@ function ItemProduct(props) {
             component="h3"
             className="title_card"
           >
-            {props.data?.name}
+            {props.data?.electronic.name}
           </Typography>
-          <p className="product_price_old">{formatMoney(props.data?.price || 0)}</p>
-          <p className="product_price">
-            {formatMoney(17000000 || 0)}
-          </p>
-          <p className="content_card">{props.data?.description}</p>
+          <p className="product_price">{formatMoney(props.data?.price || 0)} <span className="product_price_old">{props.data?.discount}</span></p>
+          <p className="content_card">{'Chip' + props.data?.electronic.chip + ', RAM '+props.data?.electronic.ram + ', ROM '+props.data?.electronic.rom + ', Bảo hành ' + props.data?.warranty_period}</p>
         </CardContent>
       </CardActionArea>
       <CardActions>

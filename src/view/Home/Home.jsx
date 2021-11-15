@@ -3,7 +3,6 @@ import BannerHome from "./components/BannerHome";
 import ItemProduct from "./components/ItemProduct";
 import DragIndicator from "@material-ui/icons/DragIndicator";
 import "./home.scss";
-import { ApiClient } from "../../api/config";
 import { homeApi } from "../../api/home";
 function Home() {
   const [books, setListBook] = useState([]);
@@ -29,19 +28,19 @@ function Home() {
   const listElectronics = async () => {
     try {
       let payload = {
-        card: '',
-        chip: '',
-        hard_disk: '',
-        manufacture: '',
-        name: '',
-        os: '',
-        ram: '',
-        rom: '',
-        screen: '',
+        card: null,
+        chip: null,
+        hard_disk: null,
+        manufacture: null,
+        name: null,
+        os: null,
+        ram: null,
+        rom: null,
+        screen: null,
       };
-      const electronicsItems = await homeApi.getListElectronic(payload);
+      let electronicsItems = await homeApi.getListElectronic(payload);
       console.log(electronicsItems)
-      setListElectronics(electronicsItems);
+      setListElectronics(electronicsItems.data.data);
     } catch (err) {
       console.log(err);
     }
