@@ -1,9 +1,11 @@
-import React from "react";
-import { Nav, Container, Row, Col, Dropdown, InputGroup, FormControl } from 'react-bootstrap';
+import React ,{useEffect} from "react";
+import { Nav, Container, Row, Col, Dropdown, InputGroup, FormControl, Button } from 'react-bootstrap';
 import "./Header.scss";
 import logo from './scart-mid.png';
 import catalogLogo from './catalog.png';
-function Header() {
+import { useHistory } from 'react-router-dom';
+function Header(props) {
+  const history = useHistory();
   return (
     <Container fluid>
       <Row className="contact-line py-1" >
@@ -38,14 +40,16 @@ function Header() {
             />
             <InputGroup.Text id="basic-addon2"><i class="fas fa-search"></i></InputGroup.Text>
           </InputGroup>
-          <a href="#">
-            <i class="fas fa-heart"></i>
-            <span >Wish list</span>
-          </a>
-          <a href="#">
-            <i class="fa fa-shopping-cart"></i>
-            <span >View cart</span>
-          </a>
+          <div class="ms-5" >
+            <Button variant="outline-primary">
+              <i class="fas fa-heart me-2"></i>
+              <span >Wish list</span></Button>
+            <Button onClick={()=>{
+              history.push('/Cart')
+            }} variant="outline-primary ms-3">
+              <i class="fa fa-shopping-cart me-2"></i>
+              <span >View cart</span></Button>
+          </div>
         </Col>
       </Row>
       <Row className="category d-flex justify-content-evenly">
@@ -57,22 +61,19 @@ function Header() {
         </Col>
         <Col className="d-flex justify-content-end " sm={8} md={8}>
           <Nav
-            activeKey="/home"
+            className="navbar"
+          // activeKey="/home"
           >
             <Nav.Item>
-              <Nav.Link href="/home">Home</Nav.Link>
+              <Nav.Link eventKey="link-1">Home</Nav.Link>
             </Nav.Item>
-            <Nav.Item>
-              <Dropdown className="dropdown" >
-                <Dropdown.Toggle id="dropdown-basic">
-                  Shop
-                </Dropdown.Toggle>
-                <Dropdown.Menu>
-                  <Dropdown.Item href="#/action-1">Action</Dropdown.Item>
-                  <Dropdown.Item href="#/action-2">Another action</Dropdown.Item>
-                  <Dropdown.Item href="#/action-3">Something else</Dropdown.Item>
-                </Dropdown.Menu>
-              </Dropdown>
+            <Nav.Item className="dropdown" >
+              <Nav.Link eventKey="link-2">Shop<i class="fas fa-caret-down ms-1"></i></Nav.Link>
+              <div class="dropdown-content">
+                <a href="#">Link 1</a>
+                <a href="#">Link 2</a>
+                <a href="#">Link 3</a>
+              </div>
             </Nav.Item>
             <Nav.Item>
               <Nav.Link eventKey="link-2">About us</Nav.Link>
