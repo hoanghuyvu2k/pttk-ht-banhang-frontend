@@ -10,9 +10,10 @@ import FavoriteBorderIcon from "@material-ui/icons/FavoriteBorder";
 import VisibilityIcon from "@material-ui/icons/Visibility";
 import AddShoppingCartIcon from "@material-ui/icons/AddShoppingCart";
 import Tooltip from "@material-ui/core/Tooltip";
-import { useSnackbar } from 'notistack';
+import { useHistory  } from "react-router-dom";
 import Cookies from 'js-cookie';
 function ItemProduct(props) {
+  const history = useHistory();
   useEffect(() => {
   });
   const formatMoney = (money, is_zero = false) => {
@@ -34,14 +35,13 @@ function ItemProduct(props) {
   };
   return (
     <Card className="card-product-item mt-3">
-      <CardActionArea>
+      <CardActionArea onClick={() => {history.push('/ProductDetail')}}>
         <CardMedia
           component="img"
           alt="Contemplative Reptile"
           height="200"
           image={
-            "http://localhost:8091" +
-            props.data?.path_file[0].path_file.substring(1)
+            props.data?.path_file[0].path_file
           }
           title={props.data?.electronic.manufacture}
         />
@@ -59,7 +59,7 @@ function ItemProduct(props) {
             <span className="product_price_old">{props.data?.discount != null ? props.data?.discount: ""}</span>
           </p>
           <p className="content_card">
-            {"Chip" +
+            {"Chip " +
               props.data?.electronic.chip +
               ", RAM " +
               props.data?.electronic.ram +
