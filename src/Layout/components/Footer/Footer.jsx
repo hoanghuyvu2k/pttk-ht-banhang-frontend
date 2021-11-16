@@ -10,7 +10,7 @@ function Footer() {
           <div className="col-md-10 offset-md-1 py-5">
             <Row>
               <div className="col-md-6">
-                <h1>Logo</h1>
+                <img src="http://localhost:3000/static/media/scart-mid.b46c6db8.png" className="img-fluid" alt="" />
               </div>
               <div className="col-md-3">
                 <label className="label-footer">Tài khoản</label>
