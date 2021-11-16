@@ -4,8 +4,8 @@ const homeApi = {
     getListElectronic: (payload) => {
         return ApiClient.post('electronic-items/search',payload);
     },
-    getListBook: (payload) => {
-        return ApiClient.post('book-search', payload);
+    getListBook: () => {
+        return ApiClient.get('book-items');
     }
 };
 
