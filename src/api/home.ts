@@ -2,10 +2,10 @@ import { ApiClient } from "./config";
 
 const homeApi = {
     getListElectronic: (payload) => {
-        return ApiClient.post('electronic-items/search',payload);
+        return ApiClient.post('electronic-items',payload);
     },
-    getListBook: () => {
-        return ApiClient.get('book-items');
+    getListBook: (payload) => {
+        return ApiClient.post('book-search', payload);
     }
 };
 
