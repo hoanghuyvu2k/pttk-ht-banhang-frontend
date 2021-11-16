@@ -18,10 +18,10 @@ function Header(props) {
             <Dropdown>
               <Dropdown.Toggle className="dropdown" id="dropdown-basic">
                 <i class="fas fa-user fa-xs"></i>
-                <span>User</span>
+                <span>Tài khoản</span>
               </Dropdown.Toggle>
               <Dropdown.Menu>
-                <Dropdown.Item href="#/action-1">Login</Dropdown.Item>
+                <Dropdown.Item href="#/action-1">Đăng nhập</Dropdown.Item>
               </Dropdown.Menu>
             </Dropdown>
           </li>
@@ -43,12 +43,12 @@ function Header(props) {
           <div class="ms-5" >
             <Button variant="outline-primary">
               <i class="fas fa-heart me-2"></i>
-              <span >Wish list</span></Button>
+              <span >Yêu thích</span></Button>
             <Button onClick={()=>{
               history.push('/Cart')
             }} variant="outline-primary ms-3">
               <i class="fa fa-shopping-cart me-2"></i>
-              <span >View cart</span></Button>
+              <span >Giỏ hàng</span></Button>
           </div>
         </Col>
       </Row>
@@ -56,7 +56,7 @@ function Header(props) {
         <Col sm={4} md={4} className="bg-primary categories ">
           <div className="btn-categories">
             <img className="" src={catalogLogo} />
-            <span>Categories</span>
+            <span>Danh mục</span>
           </div>
         </Col>
         <Col className="d-flex justify-content-end " sm={8} md={8}>
@@ -65,7 +65,7 @@ function Header(props) {
           // activeKey="/home"
           >
             <Nav.Item>
-              <Nav.Link eventKey="link-1">Home</Nav.Link>
+              <Nav.Link eventKey="link-1">Trang chủ</Nav.Link>
             </Nav.Item>
             <Nav.Item className="dropdown" >
               <Nav.Link eventKey="link-2">Shop<i class="fas fa-caret-down ms-1"></i></Nav.Link>
@@ -76,10 +76,10 @@ function Header(props) {
               </div>
             </Nav.Item>
             <Nav.Item>
-              <Nav.Link eventKey="link-2">About us</Nav.Link>
+              <Nav.Link eventKey="link-2">Giới thiệu</Nav.Link>
             </Nav.Item>
             <Nav.Item>
-              <Nav.Link eventKey="link-3" >Contact us</Nav.Link>
+              <Nav.Link eventKey="link-3" >Liên hệ</Nav.Link>
             </Nav.Item>
           </Nav>
         </Col>

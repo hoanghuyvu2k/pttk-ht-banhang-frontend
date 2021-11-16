@@ -79,9 +79,7 @@
             // position: relative;
             // display: inline-block;
             a {
-                &:hover {
-                    color: red;
-                }
+                &:hover {}
             }
             .dropdown-content {
                 display: none;
