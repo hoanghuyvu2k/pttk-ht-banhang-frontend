@@ -5,21 +5,26 @@ import BookProduct from "./components/BookProduct";
 import DragIndicator from "@material-ui/icons/DragIndicator";
 import "./home.scss";
 import { homeApi } from "../../api/home";
+import TestProduct from "./components/TestProduct";
+import Hypnosis from "react-cssfx-loading/lib/Hypnosis";
 function Home() {
   const [books, setListBook] = useState([]);
   const [electronics, setListElectronics] = useState([]);
-
+  const [isLoadingE, setIsLoadingE] = useState(true);
+  const [isLoadingB, setIsLoadingB] = useState(true);
   useEffect(() => {
-    listElectronics();
     listBooks();
+    listElectronics();
   }, []);
 
   const listBooks = async () => {
+    setIsLoadingE(true);
     let bookItems = await homeApi.getListBook();
-    console.log(bookItems.data)
     setListBook(bookItems.data);
+    setIsLoadingE(false);
   };
   const listElectronics = async () => {
+    setIsLoadingB(true);
     try {
       let payload = {
         card: null,
@@ -34,11 +39,11 @@ function Home() {
       };
       let electronicsItems = await homeApi.getListElectronic(payload);
       setListElectronics(electronicsItems.data.data);
+      setIsLoadingB(false);
     } catch (err) {
       console.log(err);
     }
   };
-
 
   return (
     <div className="container">
@@ -57,6 +62,11 @@ function Home() {
               </div>
             </div>
             <div className="row">
+              <div className="col-md-12 text-center">
+                {isLoadingE && <Hypnosis />}
+              </div>
+            </div>
+            <div className="row">
               {electronics?.map((item, index) => {
                 return (
                   <div className="col-md-3 col-sm-6">
@@ -67,7 +77,7 @@ function Home() {
             </div>
           </div>
         </div>
-        <div className="row mt-3">
+        <div className="row mt-5">
           <div className="col-md-12">
             <div className="row">
               <div className="col-md-12">
@@ -75,6 +85,11 @@ function Home() {
                   <DragIndicator className="icon-list-cate" />
                   Sách
                 </h3>
+              </div>
+            </div>
+            <div className="row">
+              <div className="col-md-12 text-center">
+                {isLoadingB && <Hypnosis />}
               </div>
             </div>
             <div className="row">
