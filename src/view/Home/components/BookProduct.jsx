@@ -10,9 +10,9 @@ import FavoriteBorderIcon from '@material-ui/icons/FavoriteBorder';
 import VisibilityIcon from '@material-ui/icons/Visibility';
 import AddShoppingCartIcon from '@material-ui/icons/AddShoppingCart';
 import Tooltip from '@material-ui/core/Tooltip';
-function ItemProduct(props) {
+function BookProduct(props) {
   useEffect(() => {
-    console.log(props.data)
+    console.log(props)
   })
     const formatMoney = (money, is_zero = false) => {
         if (!money && typeof money !== "number" && !is_zero) return;
@@ -30,8 +30,8 @@ function ItemProduct(props) {
           component="img"
           alt="Contemplative Reptile"
           height="200"
-          image={ 'http://localhost:8091' + props.data?.path_file[0].path_file.substring(1)}
-          title={props.data?.electronic.manufacture}
+          image={ props.data?.file[0].path_file}
+          title={props.data?.book.title}
         />
         <CardContent>
           <Typography
@@ -40,10 +40,10 @@ function ItemProduct(props) {
             component="h3"
             className="title_card"
           >
-            {props.data?.electronic.name}
+            {props.data?.book.title}
           </Typography>
           <p className="product_price">{formatMoney(props.data?.price || 0)} <span className="product_price_old">{props.data?.discount}</span></p>
-          <p className="content_card">{'Chip' + props.data?.electronic.chip + ', RAM '+props.data?.electronic.ram + ', ROM '+props.data?.electronic.rom + ', Bảo hành ' + props.data?.warranty_period}</p>
+          <p className="content_card">{'Tác giả '+ props.data?.book.author.name + ' NXB ' + props.data?.book.publisher.name + props.data?.book.summary}</p>
         </CardContent>
       </CardActionArea>
       <CardActions>
@@ -69,4 +69,4 @@ function ItemProduct(props) {
     </Card>
   );
 }
-export default ItemProduct;
+export default BookProduct;

@@ -2,7 +2,7 @@ import axios from 'axios';
 import queryString from 'query-string';
 import Cookie from 'js-cookie';
 
-const URL = 'http://localhost:8092';
+const URL = 'http://localhost:8091/sell-online';
 
 const createAxios = () => {
     let axiosInstant = axios.create();

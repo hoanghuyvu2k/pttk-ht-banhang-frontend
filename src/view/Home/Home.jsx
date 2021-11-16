@@ -1,13 +1,13 @@
 import React, { useEffect, useState } from "react";
 import BannerHome from "./components/BannerHome";
 import ItemProduct from "./components/ItemProduct";
+import BookProduct from "./components/BookProduct";
 import DragIndicator from "@material-ui/icons/DragIndicator";
 import "./home.scss";
 import { homeApi } from "../../api/home";
 function Home() {
   const [books, setListBook] = useState([]);
   const [electronics, setListElectronics] = useState([]);
-  const [clothes, setListClothes] = useState([]);
 
   useEffect(() => {
     listElectronics();
@@ -15,29 +15,9 @@ function Home() {
   }, []);
 
   const listBooks = async () => {
-    let payload = {
-      author: {
-        biography: null,
-        id: 0,
-        name: null
-      },
-      author_id: 0,
-      id: 0,
-      isbn: null,
-      language: null,
-      number_of_page: 0,
-      publisher: {
-        address: null,
-        id: 0,
-        name: null
-      },
-      publisher_id: 0,
-      summary: null,
-      title: null
-    };
-    let bookItems = await homeApi.getListBook(payload);
-    console.log("Book: ", bookItems);
-    setListBook(bookItems.data.data);
+    let bookItems = await homeApi.getListBook();
+    console.log(bookItems.data)
+    setListBook(bookItems.data);
   };
   const listElectronics = async () => {
     try {
@@ -53,25 +33,12 @@ function Home() {
         screen: null,
       };
       let electronicsItems = await homeApi.getListElectronic(payload);
-      console.log(electronicsItems)
       setListElectronics(electronicsItems.data.data);
     } catch (err) {
       console.log(err);
     }
   };
 
-  const listClothes = () => {
-    let clothesItems = [
-      {
-        img: "https://product.hstatic.net/1000078312/product/ao-da-bo-v1_master.jpg",
-        title: "Quần áo",
-        description: "Áo khoác mùa đông mới về",
-        price: 400000,
-        name: "Áo da bò",
-      },
-    ];
-    return clothesItems;
-  };
 
   return (
     <div className="container">
@@ -114,7 +81,7 @@ function Home() {
               {books?.map((item, index) => {
                 return (
                   <div className="col-md-3 col-sm-6">
-                    <ItemProduct data={item}></ItemProduct>
+                    <BookProduct data={item}></BookProduct>
                   </div>
                 );
               })}
