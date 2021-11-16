@@ -5,7 +5,7 @@ import BookProduct from "./components/BookProduct";
 import DragIndicator from "@material-ui/icons/DragIndicator";
 import "./home.scss";
 import { homeApi } from "../../api/home";
-import TestProduct from "./components/TestProduct";
+// import TestProduct from "./components/TestProduct";
 import Hypnosis from "react-cssfx-loading/lib/Hypnosis";
 function Home() {
   const [books, setListBook] = useState([]);
@@ -30,7 +30,7 @@ function Home() {
     setIsLoadingB(true);
     try {
       let payload = {
-       name: null,
+        name: null,
       };
       let electronicsItems = await homeApi.getListElectronic(payload);
       setListElectronics(electronicsItems.data);
