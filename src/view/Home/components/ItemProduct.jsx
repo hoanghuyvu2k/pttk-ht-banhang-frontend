@@ -17,7 +17,7 @@ function ItemProduct(props) {
   const history = useHistory();
   const { enqueueSnackbar } = useSnackbar();
   useEffect(() => {});
-  const addToCart = (id, type) => {
+  const addToCart = (item, type) => {
     var expires = (new Date(Date.now()+ 864000*1000));
     let items = Cookies.get("items")
       ? JSON.parse(Cookies.get("items"))
@@ -26,10 +26,10 @@ function ItemProduct(props) {
         book_item_ids: []
       };
     if(type == 1){
-      items.electronic_item_ids.push(id);
+      items.electronic_item_ids.push(item);
     }
     else{
-      items.book_item_ids.push(id);
+      items.book_item_ids.push(item);
     }
     Cookies.set("items", JSON.stringify(items),{ expires:  expires});
     enqueueSnackbar("Đã thêm vào giỏ hàng", { variant: "success" });
@@ -95,7 +95,7 @@ function ItemProduct(props) {
             size="small"
             className="card-btn"
             onClick={() => {
-              history.push("/ProductDetail");
+              history.push(`/ProductDetail?item=electronic-item&id=${props.data?.id}`);
             }}
           >
             <VisibilityIcon />
@@ -106,7 +106,7 @@ function ItemProduct(props) {
             size="small"
             className="card-btn"
             onClick={() => {
-              addToCart(props.data?.id, 1);
+              addToCart(props.data, 1);
             }}
           >
             <AddShoppingCartIcon />
