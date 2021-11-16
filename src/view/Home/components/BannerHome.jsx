@@ -6,37 +6,37 @@ function BannerHome() {
       <Carousel.Item>
         <img
           className="d-block w-100"
-          src="https://mdbootstrap.com/img/Photos/Slides/img%20(15).jpg"
+          src="https://cdn.tgdd.vn/Files/2021/03/05/1332649/6-dieu-dang-mong-doi-o-sieu-pham-iphone-13-iphone-13-760x367.jpg"
           alt="First slide"
         />
         <Carousel.Caption>
-          <h3>First slide label</h3>
-          <p>Nulla vitae elit libero, a pharetra augue mollis interdum.</p>
+          <h3>iPhone 13</h3>
+          <p>Phiên bản mới ra mắt của nhà táo.</p>
         </Carousel.Caption>
       </Carousel.Item>
       <Carousel.Item>
         <img
           className="d-block w-100"
-          src="https://mdbootstrap.com/img/Photos/Slides/img%20(16).jpg"
           alt="Second slide"
+          src="https://laptopgaumeo.vn/uploads/images/san-pham/gigabyte-aero-17-hdr-ya/gigabyte-aero-17-hdr-ya-1.jpg"
         />
 
         <Carousel.Caption>
-          <h3>Second slide label</h3>
-          <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
+          <h3>Laptop</h3>
+          <p>Những sản phẩm có cấu hình mạnh mẽ tại thời điểm hiện tại.</p>
         </Carousel.Caption>
       </Carousel.Item>
       <Carousel.Item>
         <img
           className="d-block w-100"
-          src="https://mdbootstrap.com/img/Photos/Slides/img%20(17).jpg"
+          src="https://c1.wallpaperflare.com/preview/234/403/732/book-bird-cuckoo-background.jpg"
           alt="Third slide"
         />
 
         <Carousel.Caption>
-          <h3>Third slide label</h3>
+          <h3>Sách</h3>
           <p>
-            Praesent commodo cursus magna, vel scelerisque nisl consectetur.
+            Sách luôn luôn là nguồn kiến thức bao la.
           </p>
         </Carousel.Caption>
       </Carousel.Item>

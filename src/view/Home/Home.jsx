@@ -11,19 +11,33 @@ function Home() {
 
   useEffect(() => {
     listElectronics();
+    listBooks();
   }, []);
 
-  const listBooks = () => {
-    let bookItems = [
-      {
-        img: "https://images-na.ssl-images-amazon.com/images/I/51-RoANBXoL._SX218_BO1,204,203,200_QL40_FMwebp_.jpg",
-        title: "Sách",
-        description: "Phát triển phần mềm",
-        price: 400000,
-        name: "Fundamentals of Software Architecture",
+  const listBooks = async () => {
+    let payload = {
+      author: {
+        biography: null,
+        id: 0,
+        name: null
       },
-    ];
-    return bookItems;
+      author_id: 0,
+      id: 0,
+      isbn: null,
+      language: null,
+      number_of_page: 0,
+      publisher: {
+        address: null,
+        id: 0,
+        name: null
+      },
+      publisher_id: 0,
+      summary: null,
+      title: null
+    };
+    let bookItems = await homeApi.getListBook(payload);
+    console.log("Book: ", bookItems);
+    setListBook(bookItems.data.data);
   };
   const listElectronics = async () => {
     try {
@@ -98,27 +112,6 @@ function Home() {
             </div>
             <div className="row">
               {books?.map((item, index) => {
-                return (
-                  <div className="col-md-3 col-sm-6">
-                    <ItemProduct data={item}></ItemProduct>
-                  </div>
-                );
-              })}
-            </div>
-          </div>
-        </div>
-        <div className="row mt-3">
-          <div className="col-md-12">
-            <div className="row">
-              <div className="col-md-12">
-                <h3 htmlFor="">
-                  <DragIndicator className="icon-list-cate" />
-                  Quần áo
-                </h3>
-              </div>
-            </div>
-            <div className="row">
-              {clothes?.map((item, index) => {
                 return (
                   <div className="col-md-3 col-sm-6">
                     <ItemProduct data={item}></ItemProduct>
