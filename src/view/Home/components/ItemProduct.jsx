@@ -1,28 +1,39 @@
 import React, { useEffect, useState } from "react";
-import Card from '@material-ui/core/Card';
-import CardActionArea from '@material-ui/core/CardActionArea';
-import CardActions from '@material-ui/core/CardActions';
-import CardContent from '@material-ui/core/CardContent';
-import CardMedia from '@material-ui/core/CardMedia';
-import Button from '@material-ui/core/Button';
-import Typography from '@material-ui/core/Typography';
-import FavoriteBorderIcon from '@material-ui/icons/FavoriteBorder';
-import VisibilityIcon from '@material-ui/icons/Visibility';
-import AddShoppingCartIcon from '@material-ui/icons/AddShoppingCart';
-import Tooltip from '@material-ui/core/Tooltip';
+import Card from "@material-ui/core/Card";
+import CardActionArea from "@material-ui/core/CardActionArea";
+import CardActions from "@material-ui/core/CardActions";
+import CardContent from "@material-ui/core/CardContent";
+import CardMedia from "@material-ui/core/CardMedia";
+import Button from "@material-ui/core/Button";
+import Typography from "@material-ui/core/Typography";
+import FavoriteBorderIcon from "@material-ui/icons/FavoriteBorder";
+import VisibilityIcon from "@material-ui/icons/Visibility";
+import AddShoppingCartIcon from "@material-ui/icons/AddShoppingCart";
+import Tooltip from "@material-ui/core/Tooltip";
+import { useSnackbar } from 'notistack';
+import Cookies from 'js-cookie';
 function ItemProduct(props) {
+  const { enqueueSnackbar } = useSnackbar();
   useEffect(() => {
-    console.log(props.data)
-  })
-    const formatMoney = (money, is_zero = false) => {
-        if (!money && typeof money !== "number" && !is_zero) return;
-      
-        return (
-          parseInt(money).toLocaleString("vi", {
-            currency: "VND",
-          }) + " (VNĐ)"
-        );
-      };
+    console.log(props.data);
+  });
+  const formatMoney = (money, is_zero = false) => {
+    if (!money && typeof money !== "number" && !is_zero) return;
+
+    return (
+      parseInt(money).toLocaleString("vi", {
+        currency: "VND",
+      }) + " (VNĐ)"
+    );
+  };
+  const saveToCookies = (product) => {
+    const products = Cookies.get("products")
+      ? JSON.parse(Cookies.get("products"))
+      : [];
+    products.push(product);
+    Cookies.set("products", JSON.stringify(products));
+    enqueueSnackbar("Đã thêm vào giỏ hàng", { variant: "success" });
+  };
   return (
     <Card className="card-product-item mt-3">
       <CardActionArea>
@@ -30,8 +41,11 @@ function ItemProduct(props) {
           component="img"
           alt="Contemplative Reptile"
           height="200"
-          image={props.data?.img}
-          title={props.data?.title}
+          image={
+            "http://localhost:8091" +
+            props.data?.path_file[0].path_file.substring(1)
+          }
+          title={props.data?.electronic.manufacture}
         />
         <CardContent>
           <Typography
@@ -40,13 +54,22 @@ function ItemProduct(props) {
             component="h3"
             className="title_card"
           >
-            {props.data?.name}
+            {props.data?.electronic.name}
           </Typography>
-          <p className="product_price_old">{formatMoney(props.data?.price || 0)}</p>
           <p className="product_price">
-            {formatMoney(17000000 || 0)}
+            {formatMoney(props.data?.price || 0)}{" "}
+            <span className="product_price_old">{props.data?.discount}</span>
           </p>
-          <p className="content_card">{props.data?.description}</p>
+          <p className="content_card">
+            {"Chip" +
+              props.data?.electronic.chip +
+              ", RAM " +
+              props.data?.electronic.ram +
+              ", ROM " +
+              props.data?.electronic.rom +
+              ", Bảo hành " +
+              props.data?.warranty_period}
+          </p>
         </CardContent>
       </CardActionArea>
       <CardActions>
@@ -61,10 +84,7 @@ function ItemProduct(props) {
           </Button>
         </Tooltip>
         <Tooltip title="Thêm vào giỏ hàng">
-          <Button
-            size="small"
-            className="card-btn"
-          >
+          <Button size="small" className="card-btn">
             <AddShoppingCartIcon />
           </Button>
         </Tooltip>

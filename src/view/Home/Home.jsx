@@ -3,47 +3,75 @@ import BannerHome from "./components/BannerHome";
 import ItemProduct from "./components/ItemProduct";
 import DragIndicator from "@material-ui/icons/DragIndicator";
 import "./home.scss";
+import { homeApi } from "../../api/home";
 function Home() {
   const [books, setListBook] = useState([]);
   const [electronics, setListElectronics] = useState([]);
-  const [clothes, setListClothes] = useState({});
+  const [clothes, setListClothes] = useState([]);
 
   useEffect(() => {
-    setListBook(listBook);
-    setListClothes();
-    setListElectronics(listElectronics);
+    listElectronics();
+    listBooks();
   }, []);
 
-  const listBook = () => {
+  const listBooks = async () => {
+    let payload = {
+      author: {
+        biography: null,
+        id: 0,
+        name: null
+      },
+      author_id: 0,
+      id: 0,
+      isbn: null,
+      language: null,
+      number_of_page: 0,
+      publisher: {
+        address: null,
+        id: 0,
+        name: null
+      },
+      publisher_id: 0,
+      summary: null,
+      title: null
+    };
+    let bookItems = await homeApi.getListBook(payload);
+    console.log("Book: ", bookItems);
+    setListBook(bookItems.data.data);
   };
-  const listElectronics = () => {
-    let electronicsItems = [
-      {
-        img: "https://salt.tikicdn.com/cache/400x400/ts/product/9e/44/ea/c4827f03c296f4c1591927393b9615b8.jpg.webp",
-        title: "Điện thoại",
-        description: "Sản phẩm mới ra đời",
-        price: 20000000,
-        name: "iPhone 12 Promax",
-      },
-      {
-        img: "https://salt.tikicdn.com/cache/400x400/ts/product/9e/44/ea/c4827f03c296f4c1591927393b9615b8.jpg.webp",
-        title: "Điện thoại",
-        description: "Sản phẩm mới ra đời",
-        price: 20000000,
-        name: "iPhone 12 Promax",
-      },
-      {
-        img: "https://salt.tikicdn.com/cache/400x400/ts/product/9e/44/ea/c4827f03c296f4c1591927393b9615b8.jpg.webp",
-        title: "Điện thoại",
-        description: "Sản phẩm mới ra đời",
-        price: 20000000,
-        name: "iPhone 12 Promax",
-      },
-    ];
-    return electronicsItems;
+  const listElectronics = async () => {
+    try {
+      let payload = {
+        card: null,
+        chip: null,
+        hard_disk: null,
+        manufacture: null,
+        name: null,
+        os: null,
+        ram: null,
+        rom: null,
+        screen: null,
+      };
+      let electronicsItems = await homeApi.getListElectronic(payload);
+      console.log(electronicsItems)
+      setListElectronics(electronicsItems.data.data);
+    } catch (err) {
+      console.log(err);
+    }
   };
 
-  const listClothes = () => {};
+  const listClothes = () => {
+    let clothesItems = [
+      {
+        img: "https://product.hstatic.net/1000078312/product/ao-da-bo-v1_master.jpg",
+        title: "Quần áo",
+        description: "Áo khoác mùa đông mới về",
+        price: 400000,
+        name: "Áo da bò",
+      },
+    ];
+    return clothesItems;
+  };
 
   return (
     <div className="container">
@@ -62,13 +90,13 @@ function Home() {
               </div>
             </div>
             <div className="row">
-            {electronics?.map((item, index) => {
-              return(
-                  <div className="col-md-3">
+              {electronics?.map((item, index) => {
+                return (
+                  <div className="col-md-3 col-sm-6">
                     <ItemProduct data={item}></ItemProduct>
                   </div>
-              );
-            })}
+                );
+              })}
             </div>
           </div>
         </div>
@@ -83,9 +111,13 @@ function Home() {
               </div>
             </div>
             <div className="row">
-              <div className="col-md-3">
-                <ItemProduct></ItemProduct>
-              </div>
+              {books?.map((item, index) => {
+                return (
+                  <div className="col-md-3 col-sm-6">
+                    <ItemProduct data={item}></ItemProduct>
+                  </div>
+                );
+              })}
             </div>
           </div>
         </div>
