@@ -6,9 +6,13 @@ import App from "./App";
 import reportWebVitals from "./reportWebVitals";
 import "bootstrap/dist/css/bootstrap.min.css";
 import "@fortawesome/fontawesome-free/css/all.min.css";
+import { SnackbarProvider } from 'notistack';
+
 ReactDOM.render(
   <React.StrictMode>
-      <App />
+      <SnackbarProvider maxSnack={3}>
+        <App />
+      </SnackbarProvider>
   </React.StrictMode>,
   document.getElementById("root")
 );

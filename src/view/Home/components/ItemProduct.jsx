@@ -10,12 +10,29 @@ import FavoriteBorderIcon from "@material-ui/icons/FavoriteBorder";
 import VisibilityIcon from "@material-ui/icons/Visibility";
 import AddShoppingCartIcon from "@material-ui/icons/AddShoppingCart";
 import Tooltip from "@material-ui/core/Tooltip";
-import { useHistory  } from "react-router-dom";
-import Cookies from 'js-cookie';
+import { useHistory } from "react-router-dom";
+import Cookies from "js-cookie";
+import { useSnackbar } from 'notistack';
 function ItemProduct(props) {
   const history = useHistory();
-  useEffect(() => {
-  });
+  const { enqueueSnackbar } = useSnackbar();
+  useEffect(() => {});
+  const addToCart = (id, type) => {
+    let items = Cookies.get("items")
+      ? JSON.parse(Cookies.get("items"))
+      :{
+        electronic_item_ids: [],
+        book_item_ids: []
+      };
+    if(type == 1){
+      items.electronic_item_ids.push(id);
+    }
+    else{
+      items.book_item_ids.push(id);
+    }
+    Cookies.set("items", JSON.stringify(items));
+    enqueueSnackbar("Đã thêm vào giỏ hàng", { variant: "success" });
+  };
   const formatMoney = (money, is_zero = false) => {
     if (!money && typeof money !== "number" && !is_zero) return;
 
@@ -25,24 +42,18 @@ function ItemProduct(props) {
       }) + " (VNĐ)"
     );
   };
-  const saveToCookies = (product) => {
-    const products = Cookies.get("products")
-      ? JSON.parse(Cookies.get("products"))
-      : [];
-    products.push(product);
-    Cookies.set("products", JSON.stringify(products));
-    //enqueueSnackbar("Đã thêm vào giỏ hàng", { variant: "success" });
-  };
   return (
     <Card className="card-product-item mt-3">
-      <CardActionArea onClick={() => {history.push('/ProductDetail')}}>
+      <CardActionArea
+        onClick={() => {
+          history.push("/ProductDetail");
+        }}
+      >
         <CardMedia
           component="img"
           alt="Contemplative Reptile"
           height="200"
-          image={
-            props.data?.path_file[0].path_file
-          }
+          image={props.data?.path_file[0].path_file}
           title={props.data?.electronic.manufacture}
         />
         <CardContent>
@@ -56,7 +67,9 @@ function ItemProduct(props) {
           </Typography>
           <p className="product_price">
             {formatMoney(props.data?.price || 0)}{" "}
-            <span className="product_price_old">{props.data?.discount != null ? props.data?.discount: ""}</span>
+            <span className="product_price_old">
+              {props.data?.discount != null ? props.data?.discount : ""}
+            </span>
           </p>
           <p className="content_card">
             {"Chip " +
@@ -77,12 +90,24 @@ function ItemProduct(props) {
           </Button>
         </Tooltip>
         <Tooltip title="Xem chi tiết">
-          <Button size="small" className="card-btn">
+          <Button
+            size="small"
+            className="card-btn"
+            onClick={() => {
+              history.push("/ProductDetail");
+            }}
+          >
             <VisibilityIcon />
           </Button>
         </Tooltip>
         <Tooltip title="Thêm vào giỏ hàng">
-          <Button size="small" className="card-btn">
+          <Button
+            size="small"
+            className="card-btn"
+            onClick={() => {
+              addToCart(props.data?.id, 1);
+            }}
+          >
             <AddShoppingCartIcon />
           </Button>
         </Tooltip>

@@ -43,7 +43,7 @@ function BookProduct(props) {
             {props.data?.book.title}
           </Typography>
           <p className="product_price">{formatMoney(props.data?.price || 0)} <span className="product_price_old">{props.data?.discount}</span></p>
-          <p className="content_card">{'Tác giả '+ props.data?.book.author.name + ' NXB ' + props.data?.book.publisher.name + props.data?.book.summary}</p>
+          <p className="content_card">{'Tác giả '+ props.data?.book.author.name + ', NXB ' + props.data?.book.publisher.name + '. ' + props.data?.book.summary}</p>
         </CardContent>
       </CardActionArea>
       <CardActions>
