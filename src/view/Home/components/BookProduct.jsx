@@ -103,7 +103,7 @@ function BookProduct(props) {
             size="small"
             className="card-btn"
             onClick={() => {
-              addToCart(props.data, 1);
+              addToCart(props.data, 2);
             }}
           >
             <AddShoppingCartIcon />
