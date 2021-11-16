@@ -1,6 +1,14 @@
-import React from "react";
-
+import React, { useState } from "react";
+import { ApiClient } from "../../api/config";
 function Login() {
+  const [username, setUsername] = useState("");
+  const [password, setPassword] = useState("");
+  const submitData = () => {
+    let res = ApiClient.post("customer-login", {
+      username: "luatnq",
+      password: "123",
+    });
+  };
   return (
     <section class="vh-100" style={{ backgroundColor: "#9A616D" }}>
       <div class="container py-5 h-100">
@@ -43,6 +51,10 @@ function Login() {
                           type="email"
                           id="form2Example17"
                           class="form-control form-control-lg"
+                          value={username}
+                          onChange={(e) => {
+                            setUsername(e.target.value);
+                          }}
                         />
                       </div>
 
@@ -54,6 +66,10 @@ function Login() {
                           type="password"
                           id="form2Example27"
                           class="form-control form-control-lg"
+                          value={password}
+                          onChange={(e) => {
+                            setPassword(e.target.value);
+                          }}
                         />
                       </div>
 
@@ -61,7 +77,7 @@ function Login() {
                         <button
                           class="btn btn-dark btn-lg btn-block"
                           type="button"
-                          onclick="testAjax()"
+                          onclick={() => {}}
                         >
                           Login
                         </button>
