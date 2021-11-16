@@ -18,6 +18,7 @@ function ItemProduct(props) {
   const { enqueueSnackbar } = useSnackbar();
   useEffect(() => {});
   const addToCart = (id, type) => {
+    var expires = (new Date(Date.now()+ 864000*1000));
     let items = Cookies.get("items")
       ? JSON.parse(Cookies.get("items"))
       :{
@@ -30,7 +31,7 @@ function ItemProduct(props) {
     else{
       items.book_item_ids.push(id);
     }
-    Cookies.set("items", JSON.stringify(items));
+    Cookies.set("items", JSON.stringify(items),{ expires:  expires});
     enqueueSnackbar("Đã thêm vào giỏ hàng", { variant: "success" });
   };
   const formatMoney = (money, is_zero = false) => {
