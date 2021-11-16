@@ -13,9 +13,7 @@ import Tooltip from "@material-ui/core/Tooltip";
 import { useSnackbar } from 'notistack';
 import Cookies from 'js-cookie';
 function ItemProduct(props) {
-  const { enqueueSnackbar } = useSnackbar();
   useEffect(() => {
-    console.log(props.data);
   });
   const formatMoney = (money, is_zero = false) => {
     if (!money && typeof money !== "number" && !is_zero) return;
@@ -32,7 +30,7 @@ function ItemProduct(props) {
       : [];
     products.push(product);
     Cookies.set("products", JSON.stringify(products));
-    enqueueSnackbar("Đã thêm vào giỏ hàng", { variant: "success" });
+    //enqueueSnackbar("Đã thêm vào giỏ hàng", { variant: "success" });
   };
   return (
     <Card className="card-product-item mt-3">
@@ -58,7 +56,7 @@ function ItemProduct(props) {
           </Typography>
           <p className="product_price">
             {formatMoney(props.data?.price || 0)}{" "}
-            <span className="product_price_old">{props.data?.discount}</span>
+            <span className="product_price_old">{props.data?.discount != null ? props.data?.discount: ""}</span>
           </p>
           <p className="content_card">
             {"Chip" +
