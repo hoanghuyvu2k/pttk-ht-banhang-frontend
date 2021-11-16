@@ -19,7 +19,10 @@ function Home() {
 
   const listBooks = async () => {
     setIsLoadingE(true);
-    let bookItems = await homeApi.getListBook();
+    let payload = {
+      name: null,
+    };
+    let bookItems = await homeApi.getListBook(payload);
     setListBook(bookItems.data);
     setIsLoadingE(false);
   };
@@ -27,18 +30,10 @@ function Home() {
     setIsLoadingB(true);
     try {
       let payload = {
-        card: null,
-        chip: null,
-        hard_disk: null,
-        manufacture: null,
-        name: null,
-        os: null,
-        ram: null,
-        rom: null,
-        screen: null,
+       name: null,
       };
       let electronicsItems = await homeApi.getListElectronic(payload);
-      setListElectronics(electronicsItems.data.data);
+      setListElectronics(electronicsItems.data);
       setIsLoadingB(false);
     } catch (err) {
       console.log(err);
