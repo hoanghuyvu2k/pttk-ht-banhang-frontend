@@ -1,6 +1,6 @@
-import axios from 'axios';
-import queryString from 'query-string';
-import Cookie from 'js-cookie';
+import axios from "axios";
+import queryString from "query-string";
+import Cookie from "js-cookie";
 
 const URL = 'http://localhost:8091/sell-online';
 
@@ -19,7 +19,7 @@ const createAxios = () => {
         },
         (error) => {
             throw error;
-        },
+        }
     );
     return axiosInstant;
 };
@@ -38,7 +38,7 @@ const handleResult = (api) => {
 const getAxios = createAxios();
 
 const handleUrl = (url, query) => {
-    return queryString.stringifyUrl({ url: url, query }, { arrayFormat: 'comma' }, );
+    return queryString.stringifyUrl({ url: url, query }, { arrayFormat: "comma" });
 };
 
 const ApiClient = {

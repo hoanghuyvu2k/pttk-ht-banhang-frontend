@@ -12,26 +12,25 @@ import AddShoppingCartIcon from "@material-ui/icons/AddShoppingCart";
 import Tooltip from "@material-ui/core/Tooltip";
 import { useHistory } from "react-router-dom";
 import Cookies from "js-cookie";
-import { useSnackbar } from 'notistack';
+import { useSnackbar } from "notistack";
 function ItemProduct(props) {
   const history = useHistory();
   const { enqueueSnackbar } = useSnackbar();
   useEffect(() => {});
   const addToCart = (item, type) => {
-    var expires = (new Date(Date.now()+ 864000*1000));
+    var expires = new Date(Date.now() + 864000 * 1000);
     let items = Cookies.get("items")
       ? JSON.parse(Cookies.get("items"))
-      :{
-        electronic_item_ids: [],
-        book_item_ids: []
-      };
-    if(type == 1){
+      : {
+          electronic_item_ids: [],
+          book_item_ids: [],
+        };
+    if (type == 1) {
       items.electronic_item_ids.push(item);
-    }
-    else{
+    } else {
       items.book_item_ids.push(item);
     }
-    Cookies.set("items", JSON.stringify(items),{ expires:  expires});
+    Cookies.set("items", JSON.stringify(items), { expires: expires });
     enqueueSnackbar("Đã thêm vào giỏ hàng", { variant: "success" });
   };
   const formatMoney = (money, is_zero = false) => {
@@ -47,7 +46,9 @@ function ItemProduct(props) {
     <Card className="card-product-item mt-3">
       <CardActionArea
         onClick={() => {
-          history.push("/ProductDetail");
+          history.push(
+            `/ProductDetail?item=electronic-item&id=${props.data?.id}`
+          );
         }}
       >
         <CardMedia
@@ -95,7 +96,9 @@ function ItemProduct(props) {
             size="small"
             className="card-btn"
             onClick={() => {
-              history.push(`/ProductDetail?item=electronic-item&id=${props.data?.id}`);
+              history.push(
+                `/ProductDetail?item=electronic-item&id=${props.data?.id}`
+              );
             }}
           >
             <VisibilityIcon />
