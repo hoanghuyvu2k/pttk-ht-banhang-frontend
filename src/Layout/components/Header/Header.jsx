@@ -13,9 +13,13 @@ import "./Header.scss";
 import logo from "./scart-mid.png";
 import catalogLogo from "./catalog.png";
 import { useHistory } from "react-router-dom";
-import Reactotron from 'reactotron-react-js'
+import Reactotron from 'reactotron-react-js';
+import { useSelector, useDispatch } from 'react-redux'
+import { decrement, increment } from '../../../redux/HomeSlices/CounterSlice'
 function Header(props) {
   const history = useHistory();
+  const count = useSelector((state) => state.counter.value)
+  const dispatch = useDispatch()
   return (
     <Container fluid>
       <Row className="contact-line py-1">
@@ -67,7 +71,8 @@ function Header(props) {
             </InputGroup.Text>
           </InputGroup>
           <div class="ms-5">
-            <Button variant="outline-primary">
+            <Button onClick={() => {
+              dispatch(increment())}} variant="outline-primary">
               <i class="fas fa-heart me-2"></i>
               <span >Yêu thích</span>
               </Button>
