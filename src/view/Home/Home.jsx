@@ -16,12 +16,9 @@ function Home() {
   const [isLoadingB, setIsLoadingB] = useState(true);
   const searchText = useSelector(searchCurrent);
   useEffect(() => {
-    searchText && listBooks() && listElectronics();
+    listBooks() && listElectronics();
   }, [searchText]);
-  useEffect(() => {
-    listBooks();
-    listElectronics();
-  }, []);
+ 
 
   const listBooks = async () => {
     setIsLoadingE(true);
