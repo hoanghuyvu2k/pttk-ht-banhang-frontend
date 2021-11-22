@@ -5,6 +5,8 @@ import BookProduct from "./components/BookProduct";
 import DragIndicator from "@material-ui/icons/DragIndicator";
 import "./home.scss";
 import { homeApi } from "../../api/home";
+import { useSelector, useDispatch } from "react-redux";
+import { searchCurrent } from "../../redux/Slices/SearchProduct";
 // import TestProduct from "./components/TestProduct";
 import Hypnosis from "react-cssfx-loading/lib/Hypnosis";
 function Home() {
@@ -12,6 +14,10 @@ function Home() {
   const [electronics, setListElectronics] = useState([]);
   const [isLoadingE, setIsLoadingE] = useState(true);
   const [isLoadingB, setIsLoadingB] = useState(true);
+  const searchText = useSelector(searchCurrent);
+  useEffect(() => {
+    searchText && listBooks() && listElectronics();
+  }, [searchText]);
   useEffect(() => {
     listBooks();
     listElectronics();
@@ -20,7 +26,7 @@ function Home() {
   const listBooks = async () => {
     setIsLoadingE(true);
     let payload = {
-      name: null,
+      name: searchText,
     };
     let bookItems = await homeApi.getListBook(payload);
     setListBook(bookItems.data);
@@ -30,7 +36,7 @@ function Home() {
     setIsLoadingB(true);
     try {
       let payload = {
-        name: null,
+        name: searchText,
       };
       let electronicsItems = await homeApi.getListElectronic(payload);
       setListElectronics(electronicsItems.data);

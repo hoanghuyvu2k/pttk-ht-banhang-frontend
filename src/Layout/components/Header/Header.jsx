@@ -15,10 +15,9 @@ import catalogLogo from "./catalog.png";
 import { useHistory } from "react-router-dom";
 import Reactotron from 'reactotron-react-js';
 import { useSelector, useDispatch } from 'react-redux'
-import { decrement, increment } from '../../../redux/HomeSlices/CounterSlice'
+import { changeValueInput } from '../../../redux/Slices/SearchProduct'
 function Header(props) {
   const history = useHistory();
-  const count = useSelector((state) => state.counter.value)
   const dispatch = useDispatch()
   return (
     <Container fluid>
@@ -65,14 +64,14 @@ function Header(props) {
               placeholder="Your keyword..."
               aria-label="Recipient's username"
               aria-describedby="basic-addon2"
+              onChange={e=>dispatch(changeValueInput(e.target.value))}
             />
-            <InputGroup.Text id="basic-addon2">
+            <InputGroup.Text id="basic-addon2" >
               <i class="fas fa-search"></i>
             </InputGroup.Text>
           </InputGroup>
           <div class="ms-5">
-            <Button onClick={() => {
-              dispatch(increment())}} variant="outline-primary">
+            <Button variant="outline-primary">
               <i class="fas fa-heart me-2"></i>
               <span >Yêu thích</span>
               </Button>
