@@ -14,7 +14,6 @@ export const searchProduct = createSlice({
     },
 })
 export const searchCurrent = (state) => { 
-    console.log(state.searchproduct.search)
     return state.searchproduct.search
 }
 // Action creators are generated for each case reducer function

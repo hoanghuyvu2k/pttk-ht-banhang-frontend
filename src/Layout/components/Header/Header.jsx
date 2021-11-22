@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import {
   Nav,
   Container,
@@ -13,12 +13,13 @@ import "./Header.scss";
 import logo from "./scart-mid.png";
 import catalogLogo from "./catalog.png";
 import { useHistory } from "react-router-dom";
-import Reactotron from 'reactotron-react-js';
-import { useSelector, useDispatch } from 'react-redux'
-import { changeValueInput } from '../../../redux/Slices/SearchProduct'
+import Reactotron from "reactotron-react-js";
+import { useSelector, useDispatch } from "react-redux";
+import { changeValueInput } from "../../../redux/Slices/SearchProduct";
 function Header(props) {
   const history = useHistory();
-  const dispatch = useDispatch()
+  const [text, setText] = useState("");
+  const dispatch = useDispatch();
   return (
     <Container fluid>
       <Row className="contact-line py-1">
@@ -64,22 +65,32 @@ function Header(props) {
               placeholder="Your keyword..."
               aria-label="Recipient's username"
               aria-describedby="basic-addon2"
-              onChange={e=>dispatch(changeValueInput(e.target.value))}
+              onChange={(e) => {
+                setText(e.target.value);
+              }}
             />
-            <InputGroup.Text id="basic-addon2" >
+            <Button
+              variant="outline-secondary"
+              id="button-addon1"
+              onClick={()=>{dispatch(changeValueInput(text))}}
+            >
               <i class="fas fa-search"></i>
-            </InputGroup.Text>
+            </Button>
           </InputGroup>
           <div class="ms-5">
             <Button variant="outline-primary">
               <i class="fas fa-heart me-2"></i>
-              <span >Yêu thích</span>
-              </Button>
-            <Button onClick={()=>{
-              history.push('/Cart')
-            }} variant="outline-primary ms-3">
+              <span>Yêu thích</span>
+            </Button>
+            <Button
+              onClick={() => {
+                history.push("/Cart");
+              }}
+              variant="outline-primary ms-3"
+            >
               <i class="fa fa-shopping-cart me-2"></i>
-              <span >Giỏ hàng</span></Button>
+              <span>Giỏ hàng</span>
+            </Button>
           </div>
         </Col>
       </Row>
@@ -112,7 +123,7 @@ function Header(props) {
               <Nav.Link eventKey="link-2">Giới thiệu</Nav.Link>
             </Nav.Item>
             <Nav.Item>
-              <Nav.Link eventKey="link-3" >Liên hệ</Nav.Link>
+              <Nav.Link eventKey="link-3">Liên hệ</Nav.Link>
             </Nav.Item>
           </Nav>
         </Col>
