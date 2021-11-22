@@ -17,7 +17,6 @@ function BookProduct(props) {
   const history = useHistory();
   const { enqueueSnackbar } = useSnackbar();
   useEffect(() => {
-    console.log(props);
   });
   const addToCart = (item, type) => {
     var expires = new Date(Date.now() + 864000 * 1000);
