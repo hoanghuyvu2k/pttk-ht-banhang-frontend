@@ -16,10 +16,15 @@ import { useHistory } from "react-router-dom";
 import Reactotron from "reactotron-react-js";
 import { useSelector, useDispatch } from "react-redux";
 import { changeValueInput } from "../../../redux/Slices/SearchProduct";
+import { useSnackbar } from "notistack";
+import {getUserInfo} from "../../../redux/Slices/LoginSlice"
 function Header(props) {
   const history = useHistory();
   const [text, setText] = useState("");
   const dispatch = useDispatch();
+  const state = useSelector((state) => state.login.userInfo)
+  Reactotron.log(state,'state')
+  const { enqueueSnackbar } = useSnackbar();
   return (
     <Container fluid>
       <Row className="contact-line py-1">
@@ -45,10 +50,25 @@ function Header(props) {
               <Dropdown.Menu>
                 <Dropdown.Item
                   onClick={() => {
+                    if(Object.keys(state).length===0)
                     history.push("/login");
+                    else {
+                      history.push("/login");
+                      dispatch(getUserInfo({}))
+                    }
                   }}
                 >
-                  Login
+                  {Object.keys(state).length===0 ? 'Log in' : 'Log out'}
+                </Dropdown.Item>
+                <Dropdown.Item
+                  onClick={() => {
+                    if(Object.keys(state).length===0)
+                      enqueueSnackbar("Đăng nhập để sử dụng chức năng này", { variant: "error" });
+                    else
+                      history.push("/Order");
+                  }}
+                >
+                  Đơn hàng
                 </Dropdown.Item>
               </Dropdown.Menu>
             </Dropdown>
@@ -84,6 +104,9 @@ function Header(props) {
             </Button>
             <Button
               onClick={() => {
+                if(Object.keys(state).length===0)
+                  enqueueSnackbar("Đăng nhập để sử dụng chức năng này", { variant: "error" });
+                else
                 history.push("/Cart");
               }}
               variant="outline-primary ms-3"

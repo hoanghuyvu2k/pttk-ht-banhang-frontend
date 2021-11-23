@@ -6,6 +6,9 @@ import Reactotron from "reactotron-react-js";
 import Cookies from "js-cookie";
 import { ApiClient } from "../../api/config.js";
 import { PRODUCT_API } from "../../constants/constants.api";
+import { useSelector, useDispatch } from "react-redux";
+import { useSnackbar } from "notistack";
+import { useHistory } from "react-router-dom";
 const fakeData = [
   {
     id: 0,
@@ -112,19 +115,21 @@ function CartTable({ className, buttonView, data }) {
   const [cookiesItem, setCookiesItem] = useState([]);
   const [isReady, setIsReady] = useState(true);
   const isBookItem = true;
-  const electricLength = products[`electronic_item_ids`].length;
+  const state = useSelector((state) => state.login.userInfo)
+  const electricLength =products.length > 0 ?  products[`electronic_item_ids`].length:0;
+  const { enqueueSnackbar } = useSnackbar();
+  const history = useHistory();
   const [payload, setPayload] = useState({
     address: "",
     bank_id: "",
     book_item_ids: [],
     clothes_item_ids: null,
-    customer_id: 2,
     electronic_item_ids: [],
     shipment_cost: 20000,
     shoes_item_ids: null,
     type_payment: "check",
     type_shipment: "cod",
-    username: "",
+    username: state.username,
   });
   const onDeleteProduct = (id) => {
     let tmp = [...data];
@@ -136,16 +141,17 @@ function CartTable({ className, buttonView, data }) {
   useEffect(() => {
     setPayload({
       ...payload,
-      electronic_item_ids: products[`electronic_item_ids`].map(
+      electronic_item_ids: products.length != 0 ? products[`electronic_item_ids`].map(
         (item) => item.id
-      ),
-      book_item_ids: products[`book_item_ids`].map((item) => item.id),
+      ):[],
+      book_item_ids:products.length != 0 ? products[`book_item_ids`].map((item) => item.id):[],
     });
   }, []);
   const createOrder = async () => {
       try {
           let res = await ApiClient.post(PRODUCT_API.ORDER.CREATE,payload);
-          Reactotron.log(res);
+          enqueueSnackbar(res.data.message, { variant: "success" });
+          history.push("/Home");
       } catch (error) {
           
       }
@@ -154,8 +160,8 @@ function CartTable({ className, buttonView, data }) {
     <>
       {isReady && (
         <>
-          {!products[`electronic_item_ids`].length &&
-          !products[`book_item_ids`] ? (
+          {products.length===0
+          ? (
             <h3>Empty cart!</h3>
           ) : (
             <>
@@ -231,7 +237,7 @@ function CartTable({ className, buttonView, data }) {
                           placeholder="Enter address"
                         />
                       </Form.Group>
-                      <Form.Group className="mb-3" controlId="username">
+                      {/* <Form.Group className="mb-3" controlId="username">
                         <Form.Label>Username</Form.Label>
                         <Form.Control
                           value={payload.username}
@@ -241,7 +247,7 @@ function CartTable({ className, buttonView, data }) {
                           type="text"
                           placeholder="Enter username"
                         />
-                      </Form.Group>
+                      </Form.Group> */}
                       <Button
                         onClick={() => {
                             createOrder()

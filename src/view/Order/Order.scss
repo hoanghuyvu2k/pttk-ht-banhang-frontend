@@ -1,0 +1,46 @@
+.cart-view {
+    .top-line {
+        font-size: 13px;
+        a {
+            text-decoration: none;
+        }
+        i {
+            margin: 0 5px 0;
+        }
+    }
+    .title {
+        border-left: 7px solid #0e8ce4;
+    }
+    .table-view {
+        .cart-table {
+            margin-left: auto;
+            margin-right: auto;
+            img {
+                width: 100px;
+                height: 75px
+            }
+            td {
+                button {
+                    width: 25px;
+                    height: 25px;
+                    background-color: #dc3545;
+                    border-radius: 5px;
+                    display: flex;
+                    align-items: center;
+                    justify-content: center;
+                }
+                i {
+                    color: white;
+                }
+            }
+            .price-text {
+                color: #FE980F;
+                font-size: 14px;
+                font-weight: bold;
+            }
+            h3 {
+                color: #dc3545;
+            }
+        }
+    }
+}

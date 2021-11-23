@@ -4,6 +4,7 @@ export const PRODUCT_API = {
         DETAIL: '/electronic-item/'
     },
     ORDER: {
-        CREATE: '/order-create'
+        CREATE: '/order-create',
+        VIEW: '/orders'
     }
 }

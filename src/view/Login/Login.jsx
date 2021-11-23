@@ -2,12 +2,15 @@ import React, { useState } from "react";
 import { ApiClient } from "../../api/config";
 import { useSnackbar } from "notistack";
 import { useHistory } from "react-router-dom";
-
+import Reactotron from "reactotron-react-js";
+import {getUserInfo} from "../../redux/Slices/LoginSlice"
+import { useDispatch } from "react-redux";
 function Login() {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   const { enqueueSnackbar } = useSnackbar();
   const history = useHistory();
+  const dispatch = useDispatch();
   const submitData = async () => {
     try {
       let res = await ApiClient.post("customer-login", {
@@ -15,6 +18,7 @@ function Login() {
         password,
       });
       enqueueSnackbar(res.data.message, { variant: "success" });
+      dispatch(getUserInfo(res?.data?.data));
       history.push("/Home");
     } catch (error) {
       enqueueSnackbar("mat khau sai", { variant: "error" });
